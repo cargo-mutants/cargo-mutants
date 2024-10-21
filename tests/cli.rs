@@ -182,7 +182,7 @@ fn well_tested_tree_finds_no_problems() {
     run_assert_cmd()
         .arg("mutants")
         .arg("--no-times")
-        .current_dir(&tmp_src_dir.path())
+        .current_dir(tmp_src_dir.path())
         .assert()
         .success()
         .stdout(predicate::function(|stdout| {
@@ -196,7 +196,7 @@ fn well_tested_tree_check_only() {
     let tmp_src_dir = copy_of_testdata("well_tested");
     run_assert_cmd()
         .args(["mutants", "--check", "--no-times"])
-        .current_dir(&tmp_src_dir.path())
+        .current_dir(tmp_src_dir.path())
         .assert()
         .success()
         .stdout(predicate::function(|stdout| {
@@ -219,7 +219,7 @@ $";
     run_assert_cmd()
         .arg("mutants")
         .arg("-d")
-        .arg(&tmp_src_dir.path())
+        .arg(tmp_src_dir.path())
         .assert()
         .code(2)
         .stderr("")
@@ -254,7 +254,7 @@ fn factorial_mutants_with_all_logs() {
         .arg("mutants")
         .arg("--all-logs")
         .arg("-d")
-        .arg(&tmp_src_dir.path())
+        .arg(tmp_src_dir.path())
         .assert()
         .code(2)
         .stderr("")
@@ -281,7 +281,7 @@ fn check_succeds_in_tree_that_builds_but_fails_tests() {
         .arg("mutants")
         .arg("--check")
         .arg("--no-times")
-        .current_dir(&tmp_src_dir.path())
+        .current_dir(tmp_src_dir.path())
         .env_remove("RUST_BACKTRACE")
         .assert()
         .success()
@@ -298,7 +298,7 @@ fn check_tree_with_mutants_skip() {
         .arg("mutants")
         .arg("--check")
         .arg("--no-times")
-        .current_dir(&tmp_src_dir.path())
+        .current_dir(tmp_src_dir.path())
         .env_remove("RUST_BACKTRACE")
         .assert()
         .success()
@@ -313,7 +313,7 @@ fn already_failing_tests_are_detected_before_running_mutants() {
     let tmp_src_dir = copy_of_testdata("already_failing_tests");
     run_assert_cmd()
         .arg("mutants")
-        .current_dir(&tmp_src_dir.path())
+        .current_dir(tmp_src_dir.path())
         .env_remove("RUST_BACKTRACE")
         .assert()
         .code(4)
@@ -341,7 +341,7 @@ fn source_tree_build_fails() {
     use predicate::str::{contains, is_match};
     run_assert_cmd()
         .arg("mutants")
-        .current_dir(&tmp_src_dir.path())
+        .current_dir(tmp_src_dir.path())
         .env_remove("RUST_BACKTRACE")
         .assert()
         .failure() // TODO: This should be a distinct error code
